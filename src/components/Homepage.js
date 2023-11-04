@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 
 const Homepage = () => {
+  const [toggleSignIn, setToggleSignIn] = useState(false);
+
+  const handleClick = () => {
+    console.log("Devjyoti");
+    setToggleSignIn(!toggleSignIn);
+  };
+
   return (
     <div className="w-screen h-screen">
       <div className="w-full h-full sm:max-w-screen md:h-screen">
@@ -12,8 +19,46 @@ const Homepage = () => {
         />
       </div>
       <div className=" w-full h-full bg-black/50 absolute top-0">
-        <Header />
+        <Header dev={handleClick} />
         <div>
+          {/* <div className="h-[90vh] w-full flex justify-center items-center">
+              <div className="w-[27vw] h-[80vh] bg-black flex justify-center items-center">
+                <div className="w-[75%] h-full">
+                  <h1 className="text-white py-5 font-bold text-3xl">
+                    Sign In
+                  </h1>
+                  <form>
+                    <input
+                      className="text-white w-full py-4 px-4 my-7 bg-[rgb(51,51,51)] rounded-sm outline-0 border-0"
+                      type="text"
+                      placeholder="Email address"
+                    />
+                    <input
+                      className="text-white w-full py-4 px-4 bg-[rgb(51,51,51)] outline-0 border-0"
+                      type="text"
+                      placeholder="Password"
+                    />
+                    <button className="bg-red-600 w-full mt-8 py-4 font-bold text-lg rounded-md text-white outline-0 border-0">
+                      Sign In
+                    </button>
+                  </form>
+                  <div className="my-5">
+                    <span className="text-gray-500">New to Netflix ? </span>
+                    <span className="text-white cursor-pointer hover:underline">
+                      {" "}
+                      Sign Up Now
+                    </span>
+                  </div>
+                  <div>
+                    <p className="text-gray-500 text-sm">
+                      This page is protected by Google reCAPTCHA to ensure
+                      you're not a bot. Learn more.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div> */}
+
           <div className="h-[90vh] w-full flex justify-center items-center">
             <div className="sm:h-[60%] sm:w-[85vw] md:h-[55%] md:w-[80vw] lg:w-[65vw] w-[80vw] h-[70%]">
               <h1 className="text-white flex-wrap font-black text-2xl sm:text-3xl md:text-3xl lg:text-4xl  text-center leading-relaxed sm:leading-relaxed">

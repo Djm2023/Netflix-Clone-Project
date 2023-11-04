@@ -1,6 +1,6 @@
 import React from "react";
 
-const Header = () => {
+const Header = ({dev}) => {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-2 grid-col-[20%_auto] sm:grid-col-[30%_auto] mx-auto max-w-screen px-3">
       <div>
@@ -25,7 +25,7 @@ const Header = () => {
           </select>
         </div>
         <div>
-          <button className="bg-red-600 text-white rounded-md text-xs ml-2 mr-5 px-3 py-1 mx-4 flex-nowrap sm:px-3 sm:py-2 sm:ml-3 sm:text-sm md:px-6 md:py-2 md:mr-20 ">
+          <button onClick={dev} className="bg-red-600 text-white rounded-md text-xs ml-2 mr-5 px-3 py-1 mx-4 flex-nowrap sm:px-3 sm:py-2 sm:ml-3 sm:text-sm md:px-6 md:py-2 md:mr-20 ">
             Sign In
           </button>
         </div>
