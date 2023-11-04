@@ -1,14 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "./Header";
 
 const Homepage = () => {
-  const [toggleSignIn, setToggleSignIn] = useState(false);
-
-  const handleClick = () => {
-    console.log("Devjyoti");
-    setToggleSignIn(!toggleSignIn);
-  };
-
   return (
     <div className="w-screen h-screen">
       <div className="w-full h-full sm:max-w-screen md:h-screen">
@@ -19,7 +12,7 @@ const Homepage = () => {
         />
       </div>
       <div className=" w-full h-full bg-black/50 absolute top-0">
-        <Header dev={handleClick} />
+        <Header />
         <div>
           {/* <div className="h-[90vh] w-full flex justify-center items-center">
               <div className="w-[27vw] h-[80vh] bg-black flex justify-center items-center">
