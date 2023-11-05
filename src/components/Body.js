@@ -3,6 +3,7 @@ import Homepage from './Homepage';
 import Login from './Login';
 import { createBrowserRouter ,RouterProvider } from 'react-router-dom';
 import Browse from './Browse';
+import SignUp from './SignUp';
 
 const Body = () => { 
    
@@ -14,6 +15,10 @@ const Body = () => {
     {
       path:'/login',
       element:<Login/>
+    },
+    {
+      path:'/signup/password',
+      element:<SignUp/>
     },
     {
       path:'/browse',

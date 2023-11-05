@@ -23,6 +23,15 @@ const Header = ({ dev }) => {
             <option className="bg-white text-black" value="Hindi">
               Hindi
             </option>
+            <option className="bg-white text-black" value="Hindi">
+              Bengali
+            </option>
+            <option className="bg-white text-black" value="Hindi">
+              Oriya
+            </option>
+            <option className="bg-white text-black" value="Hindi">
+              Punjabi
+            </option>
           </select>
         </div>
         <div>

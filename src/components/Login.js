@@ -1,13 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Header from "./Header";
 import { Link } from "react-router-dom";
+import checkValidation from "../utils/validation";
 
 const Login = () => {
   const [toggleSignIn, setToggleSignIn] = useState(false);
+  const [validationMessage, setValidationMessage] = useState(null);
+
+  const email = useRef(null);
+
+  const password = useRef(null);
 
   const handleClick = () => {
     setToggleSignIn(!toggleSignIn);
   };
+
+  const handleClickForSignIn = () => {
+    const message = checkValidation(
+      email.current.value,
+      password.current.value
+    );
+    setValidationMessage(message);
+  };
+
   return (
     <div>
       <div className="w-screen h-screen">
@@ -24,18 +39,28 @@ const Login = () => {
             <div className="w-[75vw] sm:w-[27vw] md:w-[45vw] lg:w-[27vw] sm:h-[80vh] md:h-[89vh] lg:h-[85vh] h-[75vh] bg-black flex justify-center items-center">
               <div className="w-[75%] h-full">
                 <h1 className="text-white py-5 font-bold text-3xl">Sign In</h1>
-                <form>
+                <form onSubmit={(e) => e.preventDefault()}>
                   <input
                     className="text-white w-full py-4 px-4 my-7 bg-[rgb(51,51,51)] rounded-sm outline-0 border-0"
-                    type="text"
+                    type="email"
                     placeholder="Email address"
+                    name="email"
+                    ref={email}
                   />
                   <input
                     className="text-white w-full py-4 px-4 bg-[rgb(51,51,51)] outline-0 border-0"
-                    type="text"
+                    type="password"
                     placeholder="Password"
+                    name="password"
+                    ref={password}
                   />
-                  <button className="bg-red-600 w-full mt-8 py-4 font-bold text-lg rounded-md text-white outline-0 border-0">
+                  <p className="text-sm text-red-500 pt-4">
+                    {validationMessage}
+                  </p>
+                  <button
+                    onClick={handleClickForSignIn}
+                    className="bg-red-600 w-full mt-8 py-4 font-bold text-lg rounded-md text-white outline-0 border-0"
+                  >
                     Sign In
                   </button>
                 </form>
@@ -48,7 +73,7 @@ const Login = () => {
                 <div>
                   <p className="text-gray-500 text-sm">
                     This page is protected by Google reCAPTCHA to ensure you're
-                    not a bot. Learn more.
+                    not a bot. <span className="text-blue-700">Learn more.</span>
                   </p>
                 </div>
               </div>

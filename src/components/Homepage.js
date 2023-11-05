@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import Header from "./Header";
+import checkValidation from "../utils/validation";
+import { Link } from "react-router-dom";
 
 const Homepage = () => {
+  const [validationMessage, setValidationMessage] = useState(null);
+
+  const email = useRef(null);
+
+  const handleClickEmail = () => {
+    const message = checkValidation(email.current.value);
+    setValidationMessage(message);
+  };
   return (
     <div className="w-screen h-screen">
       <div className="w-full h-full sm:max-w-screen md:h-screen">
@@ -65,20 +75,34 @@ const Homepage = () => {
                 Ready to watch? Enter your email to create or restart your
                 membership.
               </p>
-              <form method="post" className="text-center mt-4">
+              <form
+                onSubmit={(e) => e.preventDefault()}
+                method="post"
+                className="text-center mt-4"
+              >
                 <input
                   className="px-3 py-2 flex-wrap w-70 mr-3 sm:px-6 sm:py-3 sm:w-56 md:w-96 sm:mr-3 bg-transparent border-2 border-white text-white rounded-sm"
-                  type="text"
+                  type="email"
                   placeholder="Email address"
                   name="email"
+                  ref={email}
+                  id="email"
                 />
-                <button className="text-white sm:text-2xl text-xl font-semibold item-center bg-red-600 sm:px-3 px-3 sm:pt-1.5 pt-1.5 pb-2.5 sm:pb-2.5 rounded-md">
-                  <span>Get Started</span>
-                  <span className="material-symbols-outlined ">
-                    navigate_next
-                  </span>
-                </button>
+                <Link to ="/signup/password">
+                  <button
+                    onClick={handleClickEmail}
+                    className="text-white mt-5 sm:text-2xl text-xl font-semibold item-center bg-red-600 sm:px-3 px-3 sm:pt-1.5 pt-1.5 pb-2.5 sm:pb-2.5 rounded-md"
+                  >
+                    <span>Get Started</span>
+                    <span className="material-symbols-outlined ">
+                      navigate_next
+                    </span>
+                  </button>
+                </Link>
               </form>
+              <p className="text-sm text-red-500 pl-16 pt-2 sm:pl-16 sm:pt-2 md:pl-6 lg:pl-12 xl:pl-52">
+                {validationMessage}
+              </p>
             </div>
           </div>
         </div>
