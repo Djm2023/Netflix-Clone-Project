@@ -4,7 +4,7 @@ const SignUp = () => {
   return (
     <div>
         <div>
-          SignUp Page  
+          SignUp Page the Page 
         </div>
     </div>
   );
