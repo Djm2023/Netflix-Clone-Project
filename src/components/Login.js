@@ -2,10 +2,14 @@ import React, { useState, useRef } from "react";
 import Header from "./Header";
 import { Link } from "react-router-dom";
 import checkValidation from "../utils/validation";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [toggleSignIn, setToggleSignIn] = useState(false);
   const [validationMessage, setValidationMessage] = useState(null);
+  const navigate = useNavigate();
 
   const email = useRef(null);
 
@@ -21,6 +25,19 @@ const Login = () => {
       password.current.value
     );
     setValidationMessage(message);
+    signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        navigate('/browse');
+        // ...
+      })
+      .catch((error) => {
+        // const errorCode = error.code;
+        const errorMessage = error.message;
+        setValidationMessage(errorMessage)
+      });
   };
 
   return (
@@ -73,7 +90,8 @@ const Login = () => {
                 <div>
                   <p className="text-gray-500 text-sm">
                     This page is protected by Google reCAPTCHA to ensure you're
-                    not a bot. <span className="text-blue-700">Learn more.</span>
+                    not a bot.{" "}
+                    <span className="text-blue-700">Learn more.</span>
                   </p>
                 </div>
               </div>

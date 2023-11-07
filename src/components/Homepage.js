@@ -1,16 +1,20 @@
 import React, { useState, useRef } from "react";
 import Header from "./Header";
 import checkValidation from "../utils/validation";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
   const [validationMessage, setValidationMessage] = useState(null);
+
+  const navigate = useNavigate();
 
   const email = useRef(null);
 
   const handleClickEmail = () => {
     const message = checkValidation(email.current.value);
     setValidationMessage(message);
+    navigate("/signup/password", { state: email.current.value });
   };
   return (
     <div className="w-screen h-screen">
@@ -77,7 +81,6 @@ const Homepage = () => {
               </p>
               <form
                 onSubmit={(e) => e.preventDefault()}
-                method="post"
                 className="text-center mt-4"
               >
                 <input
@@ -87,18 +90,19 @@ const Homepage = () => {
                   name="email"
                   ref={email}
                   id="email"
+                  required
+                  autoComplete="true"
                 />
-                <Link to ="/signup/password">
-                  <button
-                    onClick={handleClickEmail}
-                    className="text-white mt-5 sm:text-2xl text-xl font-semibold item-center bg-red-600 sm:px-3 px-3 sm:pt-1.5 pt-1.5 pb-2.5 sm:pb-2.5 rounded-md"
-                  >
-                    <span>Get Started</span>
-                    <span className="material-symbols-outlined ">
-                      navigate_next
-                    </span>
-                  </button>
-                </Link>
+
+                <button
+                  onClick={handleClickEmail}
+                  className="text-white mt-5 sm:text-2xl text-xl font-semibold item-center bg-red-600 sm:px-3 px-3 sm:pt-1.5 pt-1.5 pb-2.5 sm:pb-2.5 rounded-md"
+                >
+                  <span>Get Started</span>
+                  <span className="material-symbols-outlined ">
+                    navigate_next
+                  </span>
+                </button>
               </form>
               <p className="text-sm text-red-500 pl-16 pt-2 sm:pl-16 sm:pt-2 md:pl-6 lg:pl-12 xl:pl-52">
                 {validationMessage}

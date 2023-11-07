@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {useLocation} from "react-router-dom";
 
 const Header = ({ dev }) => {
+  const location = useLocation();
   return (
     <div className="grid grid-cols-2 sm:grid-cols-2 grid-col-[20%_auto] sm:grid-col-[30%_auto] mx-auto max-w-screen px-3">
       <div>
@@ -11,7 +13,7 @@ const Header = ({ dev }) => {
           alt="logo"
         />
       </div>
-      <div className="flex justify-end items-center sm:pr-16 md:pr-10 lg:pr-48">
+      {!location.state? (<div className="flex justify-end items-center sm:pr-16 md:pr-10 lg:pr-48">
         <div>
           <span className="material-symbols-outlined text-white absolute text-[12px] pt-2 px-1 sm:text-lg sm:top-3 sm:px-1 md:top-5 md:px-2 md:py-[2px]">
             translate
@@ -44,7 +46,7 @@ const Header = ({ dev }) => {
             </button>
           </Link>
         </div>
-      </div>
+      </div>):null}
     </div>
   );
 };
