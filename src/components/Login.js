@@ -25,18 +25,22 @@ const Login = () => {
       password.current.value
     );
     setValidationMessage(message);
-    signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+    signInWithEmailAndPassword(
+      auth,
+      email.current.value,
+      password.current.value
+    )
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+
         console.log(user);
-        navigate('/browse');
-        // ...
+        navigate("/browse");
       })
       .catch((error) => {
         // const errorCode = error.code;
         const errorMessage = error.message;
-        setValidationMessage(errorMessage)
+        console.log(errorMessage);
       });
   };
 
@@ -51,7 +55,7 @@ const Login = () => {
           />
         </div>
         <div className=" w-full h-full bg-black/50 absolute top-0">
-          <Header dev={handleClick} />
+          <Header handleSignInClick={handleClick} />
           <div className="h-[90vh] w-full flex justify-center items-center">
             <div className="w-[75vw] sm:w-[27vw] md:w-[45vw] lg:w-[27vw] sm:h-[80vh] md:h-[89vh] lg:h-[85vh] h-[75vh] bg-black flex justify-center items-center">
               <div className="w-[75%] h-full">

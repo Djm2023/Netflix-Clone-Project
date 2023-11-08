@@ -1,11 +1,11 @@
 import React from "react";
+import Header from "./Header"
 
 const Browse = () => {
   return (
     <div>
-      <div>Browse</div>
-      <div>
-        <i className="material-symbols-outlined">search</i>
+      <div className="w-screen h-auto bg-gradient-to-b from-black">
+        <Header/>
       </div>
     </div>
   );

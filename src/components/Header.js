@@ -1,9 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {useLocation} from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { signOut } from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
 
-const Header = ({ dev }) => {
+const Header = ({ handleSignInClick }) => {
+  const user = useSelector((store) => store.user);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        navigate("/");
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
+  };
+
   return (
     <div className="grid grid-cols-2 sm:grid-cols-2 grid-col-[20%_auto] sm:grid-col-[30%_auto] mx-auto max-w-screen px-3">
       <div>
@@ -13,40 +32,42 @@ const Header = ({ dev }) => {
           alt="logo"
         />
       </div>
-      {!location.state? (<div className="flex justify-end items-center sm:pr-16 md:pr-10 lg:pr-48">
-        <div>
-          <span className="material-symbols-outlined text-white absolute text-[12px] pt-2 px-1 sm:text-lg sm:top-3 sm:px-1 md:top-5 md:px-2 md:py-[2px]">
-            translate
-          </span>
-          <select className="bg-transparent border-2 rounded-md text-md pl-3 text-xs px-0 sm:text-sm sm:text-md sm:pl-7 sm:py-1 text-white shadow-xl">
-            <option className="bg-white text-black" value="English">
-              English
-            </option>
-            <option className="bg-white text-black" value="Hindi">
-              Hindi
-            </option>
-            <option className="bg-white text-black" value="Hindi">
-              Bengali
-            </option>
-            <option className="bg-white text-black" value="Hindi">
-              Oriya
-            </option>
-            <option className="bg-white text-black" value="Hindi">
-              Punjabi
-            </option>
-          </select>
+      {!location.state && !user ? (
+        <div className="flex justify-end items-center sm:pr-16 md:pr-10 lg:pr-48">
+          <div>
+            <span className="material-symbols-outlined text-white absolute text-[12px] pt-2 px-1 sm:text-lg sm:top-3 sm:px-1 md:top-5 md:px-2 md:py-[2px]">
+              translate
+            </span>
+            <select className="bg-transparent border-2 rounded-md text-md pl-3 text-xs px-0 sm:text-sm sm:text-md sm:pl-7 sm:py-1 text-white shadow-xl">
+              <option className=" text-black" value="English">
+                English
+              </option>
+              <option className=" text-black" value="Hindi">
+                Hindi
+              </option>
+              <option className=" text-black" value="Hindi">
+                Bengali
+              </option>
+            </select>
+          </div>
+          <div>
+            <Link to="/login">
+              <button
+                onClick={handleSignInClick}
+                className="bg-red-600 text-white rounded-md text-xs ml-2 mr-5 px-3 py-1 mx-4 flex-nowrap sm:px-3 sm:py-2 sm:ml-3 sm:text-sm md:px-6 md:py-2 md:mr-20 "
+              >
+                Sign In
+              </button>
+            </Link>
+          </div>
         </div>
-        <div>
-          <Link to="/login">
-            <button
-              onClick={dev}
-              className="bg-red-600 text-white rounded-md text-xs ml-2 mr-5 px-3 py-1 mx-4 flex-nowrap sm:px-3 sm:py-2 sm:ml-3 sm:text-sm md:px-6 md:py-2 md:mr-20 "
-            >
-              Sign In
-            </button>
-          </Link>
+      ) : (
+        <div className="flex items-center justify-end mr-6">
+          <div className="hover:border-b-2 hover:border-red-600 py-0 text-lg">
+            <button className="text-white " onClick={handleSignOut}>SignOut</button>
+          </div>
         </div>
-      </div>):null}
+      )}
     </div>
   );
 };

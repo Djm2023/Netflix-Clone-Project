@@ -6,11 +6,12 @@ import { auth } from "../utils/firebase";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 const SignUp = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const email = location.state;
-  const password = useRef(null); 
+  const password = useRef(null);
+  const navigate = useNavigate();
 
   const handleSignup = () => {
     console.log(password.current.value);
@@ -18,8 +19,8 @@ const SignUp = () => {
       .then((userCredential) => {
         // Signed up
         const user = userCredential.user;
-        // ...
-        navigate('/login');
+
+        navigate("/login");
         console.log(user);
       })
       .catch((error) => {
@@ -36,7 +37,7 @@ const SignUp = () => {
         <Header />
       </div>
       <div className="w-screen h-auto flex justify-center items-center">
-        <div className="w-[80%] sm:w-[30%] md:w-[45%] lg:w-[25%] mt-7 mb-3">
+        <div className="w-[80%] sm:w-[30%] md:w-[45%] lg:w-[30%] mt-7 mb-3">
           <p className="text-gray-500 text-sm">
             STEP <span className="text-black">1</span> OF{" "}
             <span className="text-black">3</span>
