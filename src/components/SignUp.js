@@ -58,6 +58,7 @@ const SignUp = () => {
               name="password"
               placeholder="Enter your password"
               ref={password}
+              id="password"
             />
             <p className="text-lg text-blue-500 py-4">Forgot your pasword?</p>
             <button
