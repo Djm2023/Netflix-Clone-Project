@@ -1,14 +1,14 @@
 import React, { useState, useRef } from "react";
 import Header from "./Header";
 import checkValidation from "../utils/validation";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUserEmail } from "../utils/userEmailSlice";
 // import { useSelector } from "react-redux";
 
 const Homepage = () => {
   const [validationMessage, setValidationMessage] = useState(null);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const email = useRef(null);
@@ -17,6 +17,7 @@ const Homepage = () => {
     const message = checkValidation(email.current.value);
     setValidationMessage(message);
     dispatch(addUserEmail(email.current.value));
+    navigate('/signup/password');
   };
 
   return (
