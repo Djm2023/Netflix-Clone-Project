@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import checkValidation from "../utils/validation";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [toggleSignIn, setToggleSignIn] = useState(false);
   const [validationMessage, setValidationMessage] = useState(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const email = useRef(null);
 
@@ -33,9 +33,8 @@ const Login = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-
+        // navigate('/browse');
         console.log(user);
-        navigate("/browse");
       })
       .catch((error) => {
         // const errorCode = error.code;

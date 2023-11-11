@@ -1,21 +1,56 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { addUser, removeUser } from "../utils/userSlice";
+import { useDispatch } from "react-redux";
+import { removeUserEmail } from "../utils/userEmailSlice";
 
 const Header = ({ handleSignInClick }) => {
   const user = useSelector((store) => store.user);
-  const location = useLocation();
+  const userSignupEmailId = useSelector((store) => store.usersEmail);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName } = user;
+
+        dispatch(
+          addUser({
+            uid: uid,
+            email: email,
+            displayName: displayName,
+          })
+        );
+        dispatch(removeUserEmail());
+        navigate("/browse");
+      } else {
+        if (userSignupEmailId) {
+          console.log("DEV SIgnup");
+          navigate("/signup/password");
+        } else {
+          console.log("DEV remove");
+          dispatch(removeUser());
+          navigate("/");
+        }
+      }
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        navigate("/");
+        // navigate("/");
       })
       .catch((error) => {
         // An error happened.
@@ -32,7 +67,7 @@ const Header = ({ handleSignInClick }) => {
           alt="logo"
         />
       </div>
-      {!location.state && !user ? (
+      {!userSignupEmailId && !user ? (
         <div className="flex justify-end items-center sm:pr-16 md:pr-10 lg:pr-48">
           <div>
             <span className="material-symbols-outlined text-white absolute text-[12px] pt-2 px-1 sm:text-lg sm:top-3 sm:px-1 md:top-5 md:px-2 md:py-[2px]">
@@ -64,7 +99,12 @@ const Header = ({ handleSignInClick }) => {
       ) : (
         <div className="flex items-center justify-end mr-6">
           <div className="hover:border-b-2 hover:border-red-600 py-0 text-lg">
-            <button className="text-white " onClick={handleSignOut}>SignOut</button>
+            <button
+              className="text-white cursor-pointer"
+              onClick={handleSignOut}
+            >
+              SignOut
+            </button>
           </div>
         </div>
       )}

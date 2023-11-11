@@ -1,21 +1,24 @@
 import React, { useState, useRef } from "react";
 import Header from "./Header";
 import checkValidation from "../utils/validation";
-// import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUserEmail } from "../utils/userEmailSlice";
+// import { useSelector } from "react-redux";
 
 const Homepage = () => {
   const [validationMessage, setValidationMessage] = useState(null);
-
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const email = useRef(null);
 
   const handleClickEmail = () => {
     const message = checkValidation(email.current.value);
     setValidationMessage(message);
-    navigate("/signup/password", { state: email.current.value });
+    dispatch(addUserEmail(email.current.value));
   };
+
   return (
     <div className="w-screen h-screen">
       <div className="w-full h-full sm:max-w-screen md:h-screen">
@@ -25,7 +28,7 @@ const Homepage = () => {
           alt="background"
         />
       </div>
-      <div className=" w-full h-full bg-black/50 absolute top-0">
+      <div className=" w-full h-full bg-black/60 absolute top-0">
         <Header />
         <div>
           {/* <div className="h-[90vh] w-full flex justify-center items-center">

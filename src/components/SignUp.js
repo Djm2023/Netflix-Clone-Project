@@ -1,27 +1,24 @@
 import React from "react";
 import Header from "./Header";
-import { useLocation } from "react-router-dom";
+// import { useLocation} from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 
 const SignUp = () => {
-  const location = useLocation();
-  const email = location.state;
+  const userEmailId = useSelector((store) => store.usersEmail);
+  // const location = useLocation();
   const password = useRef(null);
-  const navigate = useNavigate();
-
+  const email = userEmailId;
+  // console.log("Signup" ,email);
   const handleSignup = () => {
     console.log(password.current.value);
     createUserWithEmailAndPassword(auth, email, password.current.value)
       .then((userCredential) => {
         // Signed up
         const user = userCredential.user;
-
-        navigate("/login");
-        console.log(user);
+        // console.log(user);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -50,7 +47,7 @@ const SignUp = () => {
             Enter your password and you'll be watching in no time.
           </p>
           <p className="text-lg text-gray-500">Email</p>
-          <p className="text-lg font-semibold">{location.state}</p>
+          <p className="text-lg font-semibold">{email}</p>
           <form onSubmit={(e) => e.preventDefault()}>
             <input
               className="w-full py-4 px-3 border-[1px] border-gray-400 outline-red-600 mt-3 "
