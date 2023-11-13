@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-// import { useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
@@ -9,15 +7,33 @@ import { onAuthStateChanged } from "firebase/auth";
 import { addUser, removeUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
 import { removeUserEmail } from "../utils/userEmailSlice";
+import { toggleSignIn } from "../utils/userSliceSignIn";
+import {removeSignIn} from "../utils/userSliceSignIn";
 
-const Header = ({ handleSignInClick }) => {
+const Header = () => {
+  // const [toggleSignIn, setToggleSignIn] = useState(null);
   const user = useSelector((store) => store.user);
   const userSignupEmailId = useSelector((store) => store.usersEmail);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // const handleSignInClick = () => {
+  //   // setToggleSignIn((prevToggleSignIn) => {
+  //   //   // console.log("Before setToggleSignIn:", prevToggleSignIn);
+  //   //   const newToggleSignIn = !prevToggleSignIn;
+  //   //   // console.log("After setToggleSignIn:", newToggleSignIn);
+  //   //   return newToggleSignIn;
+  //   };
+  const toggleState = () => {
+    dispatch(toggleSignIn(true));
+  };
+  const signInClick = useSelector((store) => store.signin);
+
+  // console.log(signInClick);
+
   useEffect(() => {
-    const unsubscribe =  onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, email, displayName } = user;
 
@@ -29,22 +45,27 @@ const Header = ({ handleSignInClick }) => {
           })
         );
         dispatch(removeUserEmail());
+        dispatch(removeSignIn());
         navigate("/browse");
       } else {
         if (userSignupEmailId) {
-          console.log("DEV SIgnup");
+          // console.log("DEV SIgnup");
           navigate("/signup/password");
         } else {
-          console.log("DEV remove");
-          dispatch(removeUser());
-          navigate("/");
+          if (signInClick) {
+            navigate("/login");
+          } else {
+            // console.log("DEV remove");
+            dispatch(removeUser());
+            navigate("/");
+          }
         }
       }
     });
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [signInClick]);
 
   const handleSignOut = () => {
     signOut(auth)
@@ -57,7 +78,6 @@ const Header = ({ handleSignInClick }) => {
         console.log(error);
       });
   };
-
   return (
     <div className="grid grid-cols-2 sm:grid-cols-2 grid-col-[20%_auto] sm:grid-col-[30%_auto] mx-auto max-w-screen px-3">
       <div>
@@ -86,14 +106,12 @@ const Header = ({ handleSignInClick }) => {
             </select>
           </div>
           <div>
-            <Link to="/login">
-              <button
-                onClick={handleSignInClick}
-                className="bg-red-600 text-white rounded-md text-xs ml-2 mr-5 px-3 py-1 mx-4 flex-nowrap sm:px-3 sm:py-2 sm:ml-3 sm:text-sm md:px-6 md:py-2 md:mr-20 "
-              >
-                Sign In
-              </button>
-            </Link>
+            <button
+              onClick={toggleState}
+              className="bg-red-600 text-white rounded-md text-xs ml-2 mr-5 px-3 py-1 mx-4 flex-nowrap sm:px-3 sm:py-2 sm:ml-3 sm:text-sm md:px-6 md:py-2 md:mr-20 "
+            >
+              Sign Inn
+            </button>
           </div>
         </div>
       ) : (

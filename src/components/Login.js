@@ -4,22 +4,17 @@ import { Link } from "react-router-dom";
 import checkValidation from "../utils/validation";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
-// import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [toggleSignIn, setToggleSignIn] = useState(false);
   const [validationMessage, setValidationMessage] = useState(null);
-  // const navigate = useNavigate();
-
+  
   const email = useRef(null);
 
   const password = useRef(null);
 
-  const handleClick = () => {
-    setToggleSignIn(!toggleSignIn);
-  };
-
+  
   const handleClickForSignIn = () => {
+    console.log("Hi signIN");
     const message = checkValidation(
       email.current.value,
       password.current.value
@@ -54,7 +49,7 @@ const Login = () => {
           />
         </div>
         <div className=" w-full h-full bg-black/50 absolute top-0">
-          <Header handleSignInClick={handleClick} />
+          <Header  />
           <div className="h-[90vh] w-full flex justify-center items-center">
             <div className="w-[75vw] sm:w-[27vw] md:w-[45vw] lg:w-[27vw] sm:h-[80vh] md:h-[89vh] lg:h-[85vh] h-[75vh] bg-black flex justify-center items-center">
               <div className="w-[75%] h-full">

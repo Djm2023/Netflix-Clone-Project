@@ -37,7 +37,7 @@ const SignUp = () => {
         <div className="w-[80%] sm:w-[30%] md:w-[45%] lg:w-[30%] mt-7 mb-3">
           <p className="text-gray-500 text-sm">
             STEP <span className="text-black">1</span> OF{" "}
-            <span className="text-black">3</span>
+            <span className="text-black">2</span>
           </p>
           <h1 className="text-3xl font-bold leading-relaxed">Welcome back!</h1>
           <h1 className="text-3xl font-bold leading-relaxed">

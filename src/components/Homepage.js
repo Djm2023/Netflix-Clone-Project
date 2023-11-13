@@ -8,6 +8,8 @@ import { addUserEmail } from "../utils/userEmailSlice";
 
 const Homepage = () => {
   const [validationMessage, setValidationMessage] = useState(null);
+  const [isToggled, setIsToggled] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -20,6 +22,12 @@ const Homepage = () => {
     navigate('/signup/password');
   };
 
+  const toggleState = () => {
+    // setIsToggled((prev) => !prev);
+    navigate('/login');
+  };
+  // console.log(isToggled)
+
   return (
     <div className="w-screen h-screen">
       <div className="w-full h-full sm:max-w-screen md:h-screen">
@@ -30,7 +38,7 @@ const Homepage = () => {
         />
       </div>
       <div className=" w-full h-full bg-black/60 absolute top-0">
-        <Header />
+        <Header isToggled={isToggled} toggleState={toggleState} />
         <div>
           {/* <div className="h-[90vh] w-full flex justify-center items-center">
               <div className="w-[27vw] h-[80vh] bg-black flex justify-center items-center">
