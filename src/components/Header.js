@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
@@ -8,29 +8,19 @@ import { addUser, removeUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
 import { removeUserEmail } from "../utils/userEmailSlice";
 import { toggleSignIn } from "../utils/userSliceSignIn";
-import {removeSignIn} from "../utils/userSliceSignIn";
+import { removeSignIn } from "../utils/userSliceSignIn";
 
 const Header = () => {
-  // const [toggleSignIn, setToggleSignIn] = useState(null);
   const user = useSelector((store) => store.user);
   const userSignupEmailId = useSelector((store) => store.usersEmail);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const handleSignInClick = () => {
-  //   // setToggleSignIn((prevToggleSignIn) => {
-  //   //   // console.log("Before setToggleSignIn:", prevToggleSignIn);
-  //   //   const newToggleSignIn = !prevToggleSignIn;
-  //   //   // console.log("After setToggleSignIn:", newToggleSignIn);
-  //   //   return newToggleSignIn;
-  //   };
   const toggleState = () => {
     dispatch(toggleSignIn(true));
   };
   const signInClick = useSelector((store) => store.signin);
-
-  // console.log(signInClick);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -49,13 +39,11 @@ const Header = () => {
         navigate("/browse");
       } else {
         if (userSignupEmailId) {
-          // console.log("DEV SIgnup");
           navigate("/signup/password");
         } else {
           if (signInClick) {
             navigate("/login");
           } else {
-            // console.log("DEV remove");
             dispatch(removeUser());
             navigate("/");
           }
