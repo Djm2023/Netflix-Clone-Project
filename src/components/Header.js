@@ -98,12 +98,12 @@ const Header = () => {
               onClick={toggleState}
               className="bg-red-600 text-white rounded-md text-xs ml-2 mr-5 px-3 py-1 mx-4 flex-nowrap sm:px-3 sm:py-2 sm:ml-3 sm:text-sm md:px-6 md:py-2 md:mr-20 "
             >
-              Sign Inn
+              Sign In
             </button>
           </div>
         </div>
       ) : (
-        <div className="flex items-center justify-end mr-6">
+        <div className="flex items-center justify-end mr-7 sm:mr-20 md:mr-36 lg:mr-52 xl:mr-70">
           <div className="hover:border-b-2 hover:border-red-600 py-0 text-lg">
             <button
               className="text-white cursor-pointer"
