@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { removeUserEmail } from "../utils/userEmailSlice";
 import { toggleSignIn } from "../utils/userSliceSignIn";
 import { removeSignIn } from "../utils/userSliceSignIn";
+import { LOGO } from "../utils/constants";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
@@ -71,7 +72,7 @@ const Header = () => {
       <div>
         <img
           className="sm:w-[160px] w-[120px] ml-7 sm:ml-[15px] md:ml-[55px] lg:ml-[160px]"
-          src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
+          src={LOGO}
           alt="logo"
         />
       </div>

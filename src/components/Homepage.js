@@ -4,6 +4,7 @@ import checkValidation from "../utils/validation";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUserEmail } from "../utils/userEmailSlice";
+import { BACKGROUND_IMG } from "../utils/constants";
 
 const Homepage = () => {
   const [validationMessage, setValidationMessage] = useState(null);
@@ -24,7 +25,7 @@ const Homepage = () => {
       <div className="w-full h-full sm:max-w-screen md:h-screen">
         <img
           className="w-full sm:max-w-screen sm:max-h-full h-full md:w-full md:h-full bg-center bg-cover"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/ab4b0b22-2ddf-4d48-ae88-c201ae0267e2/0efe6360-4f6d-4b10-beb6-81e0762cfe81/IN-en-20231030-popsignuptwoweeks-perspective_alpha_website_large.jpg"
+          src={BACKGROUND_IMG}
           alt="background"
         />
       </div>
