@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const SecondaryContainer = () => {
   return (
-    <div>SecondaryContainer</div>
-  )
-}
+    <div>
+      <div>SecondaryContainer</div>
+    </div>
+  );
+};
 
-export default SecondaryContainer
+export default SecondaryContainer;

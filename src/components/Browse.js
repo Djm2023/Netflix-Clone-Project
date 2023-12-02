@@ -9,7 +9,7 @@ const Browse = () => {
 
   return (
     <div>
-      <div className="w-screen h-auto bg-gradient-to-b from-black">
+      <div className="w-screen h-auto absolute bg-gradient-to-b from-black z-20">
         <Header />
       </div>
       <MainContainer />
