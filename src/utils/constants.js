@@ -5,3 +5,10 @@ export const BACKGROUND_IMG =
   "https://assets.nflxext.com/ffe/siteui/vlv3/ab4b0b22-2ddf-4d48-ae88-c201ae0267e2/0efe6360-4f6d-4b10-beb6-81e0762cfe81/IN-en-20231030-popsignuptwoweeks-perspective_alpha_website_large.jpg";
 
 
+ export const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhODZjZTIxMjJiMjU0MDI4OGE1NWE0MmIwZWQ3YmE4MSIsInN1YiI6IjY1NTU4ZWQ1YWM0MTYxMDBlMzNkN2YwNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oXkZGlmOX5baAQvIHrkkeFCN8XVFPpjz7eiQgzAsX7I'
+    }
+  };
