@@ -12,3 +12,7 @@ export const BACKGROUND_IMG =
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhODZjZTIxMjJiMjU0MDI4OGE1NWE0MmIwZWQ3YmE4MSIsInN1YiI6IjY1NTU4ZWQ1YWM0MTYxMDBlMzNkN2YwNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oXkZGlmOX5baAQvIHrkkeFCN8XVFPpjz7eiQgzAsX7I'
     }
   };
+
+  export const IMAGE_CDN = 'https://image.tmdb.org/t/p/w300/';
+
+  export const WINDOW_TIME = 'day'

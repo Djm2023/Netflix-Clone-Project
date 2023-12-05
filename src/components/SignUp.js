@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "./Header";
-// import { useLocation} from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useRef } from "react";
@@ -8,7 +7,6 @@ import { useSelector } from "react-redux";
 
 const SignUp = () => {
   const userEmailId = useSelector((store) => store.usersEmail);
-  // const location = useLocation();
   const password = useRef(null);
   const email = userEmailId;
   // console.log("Signup" ,email);
