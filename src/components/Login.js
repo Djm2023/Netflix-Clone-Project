@@ -71,7 +71,7 @@ const Login = () => {
                     ref={password}
                   />
                   <p className="text-sm text-red-500 pt-4">
-                    {validationMessage}
+                    {/* {validationMessage} */}
                   </p>
                   <button
                     onClick={handleClickForSignIn}
